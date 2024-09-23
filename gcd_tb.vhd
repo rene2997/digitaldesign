@@ -37,13 +37,17 @@ architecture behaviour of gcd_tb is
 			req   : in  std_logic;              -- Start computation.
 			AB    : in  unsigned(15 downto 0);  -- The two operands.
 			ack   : out std_logic;              -- Computation is complete.
-			C     : out unsigned(15 downto 0)); -- The result.
+			C     : out unsigned(15 downto 0); -- The result.
+			segments : out unsigned(7 downto 0);  -- 8-bit segment control (7 segments + decimal point)
+            sel      : out unsigned(7 downto 0));   -- 4-bit segment selector
 	end component;
 
 	-- Internal signals
 	signal clk, reset : std_logic;
 	signal req, ack   : std_logic;
 	signal AB, C      : unsigned(15 downto 0);
+	signal segments   : unsigned(7 downto 0);
+	signal sel        : unsigned(7 downto 0);
 
 begin
 
@@ -56,7 +60,9 @@ begin
 			req   => req,
 			AB    => AB,
 			ack   => ack,
-			C     => C
+			C     => C,
+			segments => segments,
+			sel => sel
 		);
 
 	-- Clock generation (simulation use only)
