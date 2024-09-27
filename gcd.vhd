@@ -45,6 +45,7 @@ begin
     next_reg_b <= reg_b;
     next_state <= state;
     ack <= '0';
+    C <= (others => '0');
     
     case state is
       -- State S0: Initialization
